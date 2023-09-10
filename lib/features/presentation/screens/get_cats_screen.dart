@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../../core/widgets/custom_network_image.dart';
 import '../../../core/widgets/custom_tooltip_image.dart';
 import '../commons/app_bar_widget.dart';
 import '../cubit/cat_state.dart';
@@ -25,7 +24,7 @@ class GetCatScreen extends StatelessWidget {
               body: BlocBuilder<CatCubit, CatState>(
                 builder: (context, state) {
                   return state is GetCatsLoadingState
-                      ? const Center(child: CircularProgressIndicator())
+                      ? const Center(child: CircularProgressIndicator(color: AppColors.blue,))
                       : TabBarView(children: [
                           Container(
                             margin: const EdgeInsets.all(12),
@@ -41,12 +40,8 @@ class GetCatScreen extends StatelessWidget {
                                   .length,
                               itemBuilder: (context, i) {
                                 return CustomImageTooltip(
-                                  message: BlocProvider.of<CatCubit>(context)
-                                      .cats[i]['id'],
-                                  child: CustomNetworkImage(
-                                      imageUrl:
-                                          BlocProvider.of<CatCubit>(context)
-                                              .cats[i]['url']),
+                                  
+                                  cat: BlocProvider.of<CatCubit>(context).cats[i], 
                                 );
                               },
                             ),

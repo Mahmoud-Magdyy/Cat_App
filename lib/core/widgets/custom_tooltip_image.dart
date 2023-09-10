@@ -1,24 +1,26 @@
-
 import 'package:flutter/material.dart';
 
-class CustomImageTooltip extends StatelessWidget {
+import '../../features/data/model/get_cats_mode.dart';
+import 'custom_network_image.dart';
 
+class CustomImageTooltip extends StatelessWidget {
   const CustomImageTooltip({
-    super.key, this.message, this.child,
+    super.key,
+    required this.cat,
+    
   });
-  final String? message;
-  final Widget? child;
+  final GetCatModel cat;
+
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: message,
-      
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(
-          Radius.circular(15),
-        ),
-        child: child,
-    ));
+        message: cat.id,
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(15),
+          ),
+          child: CustomNetworkImage(imageUrl: cat.url),
+        ));
   }
 }
 
